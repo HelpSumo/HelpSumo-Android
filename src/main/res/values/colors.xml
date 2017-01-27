@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="bg">#ffffff</color>
+    <color name="ash">#eaeaea</color>
+    <color name="grey">#c6c6c6</color>
+    <color name="darkgrey">#4b4b4b</color>
+    <color name="back">#f5f5f5</color>
+    <color name="btn">#b8d6b1</color>
+    <color name="primary">#52a6bf</color>
+    <color name="pop">#8ecc87</color>
+    <color name="orange">#ffc123</color>
+    <color name="reply">#c858ba55</color>
+    <color name="white">#ffffff</color>
+    <color name="palegreen">#e1f2e5</color>
+    <color name="toolbar">#7dd69f</color>
+    <color name="pink">#c997c9</color>
+    <color name="bgc">#baeff5</color>
+    <color name="comt">#f0f3fa</color>
+
+</resources>

@@ -1,0 +1,50 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.helpsumo.api.ticketing">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity android:name=".ticket.Activities.NewTickets" />
+        <activity
+            android:name=".ticket.Activities.TicketList"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ticket.Activities.ViewTicket" />
+        <activity android:name=".ticket.Activities.CommentTicket" />
+        <activity android:name=".ticket.Activities.Faq" />
+        <activity android:name=".ticket.Activities.Article" />
+        <activity android:name=".ticket.Activities.ArticleView" />
+
+        <provider
+            android:name=".ticket.Database.ContentProvider.CommonContentProvider"
+            android:authorities="com.ticketing.helpsumo.appcommon"
+            android:exported="true"
+            android:grantUriPermissions="true"></provider>
+        <provider
+            android:name=".ticket.Database.ContentProvider.TicketContentProvider"
+            android:authorities="com.ticketing.helpsumo.appticket">
+
+        </provider>
+        <provider
+            android:name=".ticket.Database.ContentProvider.CommentContentProvider"
+            android:authorities="com.ticketing.helpsumo.appcomment">
+
+        </provider>
+
+        <provider
+            android:name=".ticket.Database.ContentProvider.FaqContentProvider"
+            android:authorities="com.ticketing.helpsumo.appfaq">
+
+        </provider>
+        <provider
+            android:name=".ticket.Database.ContentProvider.ArticleContentProvider"
+            android:authorities="com.ticketing.helpsumo.apparticle">
+
+        </provider>
+    </application>
+</manifest>
