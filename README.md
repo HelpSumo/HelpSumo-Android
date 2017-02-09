@@ -2,14 +2,19 @@
 
 ## Prerequisites :
 
-* Android version 4.0 and higher (6.0)
+* The library requires Android API Level 16+
+
+## Installation 
+
+	* Download HelpSumo.zip file and Extract it 
+	* Import New Library Module and set required path to the one extracted
 
 ## Usage
 
 Add a dependency to your build.gradle:
 
 	dependencies {
-    	compile 'com.github.clans:fab:1.6.4'
+    	 compile project(':HelpSumoSDK')
 	}
 	
 Initialize Config:
