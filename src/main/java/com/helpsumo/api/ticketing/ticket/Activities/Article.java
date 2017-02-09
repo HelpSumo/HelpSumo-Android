@@ -81,9 +81,8 @@ public class Article extends AppCompatActivity {
         articleCategoryupdatetime = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String updatetime = articleCategoryupdatetime.getString("articleCategoryupdatetime", "");
         Useremail = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String useremail = Useremail.getString("Useremail", "");
+       // String useremail = Useremail.getString("Useremail", "");
         ApiKey = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String apikeyy = ApiKey.getString("ApiKey", "");
         Articleupdatetime = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String articleupdatetime = Articleupdatetime.getString("Articleupdatetime", "");
 
@@ -138,7 +137,8 @@ public class Article extends AppCompatActivity {
                 } while (c.moveToNext());
             }
             c.close();
-            String apky = ApiKey.getString("Apikey", "");
+            String apky = ApiKey.getString("ApiKey","");
+            Log.e("sdf","sdf"+apky);
             String time = articleCategoryupdatetime.getString("articleCategoryupdatetime", "");
             Map<String, String> map1 = new HashMap<>();
             map1.put("apikey", apky);
@@ -153,6 +153,7 @@ public class Article extends AppCompatActivity {
             Map<String, String> map = new HashMap<String, String>();
             map.put("apikey", apky);
             map.put("action", "list");
+            map.put("email" ,mail);
             map.put("modified_date", articleupdatetime);
             progressview.setVisibility(View.VISIBLE);
             if (NetworkFunction.isOnline(getApplicationContext())) {
@@ -269,7 +270,6 @@ public class Article extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> arg0) {
                 }
@@ -302,12 +302,7 @@ public class Article extends AppCompatActivity {
                 String jsonStr = jsonObject.toString();
                 System.out.println("jsonString: " + jsonStr);
                 String url = AppConstants.url + "article_categories";
-                String response = null;
-                try {
-                    response = doPostRequest(url, jsonStr);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String response = doPostRequest(url, jsonStr);
                 if (response != null) {
                     Log.e("article", "response: " + response.replaceAll("\\s", " "));
                     String catid = "", catname = "", catstatus = "", catparentid = "";
@@ -416,12 +411,7 @@ public class Article extends AppCompatActivity {
                 String jsonStr = jsonObject.toString();
                 System.out.println("jsonString: " + jsonStr);
                 String url = AppConstants.url + "article";
-                String response = null;
-                try {
-                    response = doPostRequest(url, jsonStr);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String response = doPostRequest(url, jsonStr);
                 if (response != null) {
                     Log.e("response", "article: " + response.replaceAll("\\s", " "));
                     JSONObject obj = new JSONObject(response);
@@ -440,7 +430,7 @@ public class Article extends AppCompatActivity {
                         try {
                             for (int i = 0; i < array.length(); i++) {
                                 String artid = "", artcat = "", artsub = "", arttitle = "", artdescrp = "",
-                                        arttotalview = "", like = "", unlike = "",likeflag = "", metatitle = "", metakeyword = "", metadescrp = "", commentcount = "", artdate = "";
+                                        arttotalview = "", like = "", unlike = "",likeflag = "", commentcount = "", artdate = "";
                                 JSONObject jObject = array.getJSONObject(i);
                                 Iterator<String> keys = jObject.keys();
                                 while (keys.hasNext()) {
@@ -463,19 +453,13 @@ public class Article extends AppCompatActivity {
                                         like = value;
                                     } else if (key.equalsIgnoreCase("unlike")) {
                                         unlike = value;
-                                    } else if (key.equalsIgnoreCase("meta_title")) {
-                                        metatitle = value;
-                                    } else if (key.equalsIgnoreCase("meta_keyword")) {
-                                        metakeyword = value;
-                                    } else if (key.equalsIgnoreCase("meta_description")) {
-                                        metadescrp = value;
                                     } else if (key.equalsIgnoreCase("modified_at")) {
                                         artdate = value;
                                     } else if (key.equalsIgnoreCase("comment")) {
                                         commentcount = value;
-                                    } else if (key.equalsIgnoreCase("like")) {
-                                        //likeflag = value;
-                                        likeflag= "0";
+                                    } else if (key.equalsIgnoreCase("check")) {
+                                        likeflag = value;
+
                                     }
                                 }
                                 if (arrayarticleid.contains(artid)) {

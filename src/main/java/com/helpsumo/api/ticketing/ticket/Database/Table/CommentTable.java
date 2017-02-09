@@ -42,4 +42,4 @@ public class CommentTable {
         onCreate(database);
     }
 }
-//Comment_type------ 1 = ticket comment, like = Article comment.
+//Comment_type------ 1 = ticket comment, 2 = Article comment.

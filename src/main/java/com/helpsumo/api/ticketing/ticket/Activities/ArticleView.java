@@ -59,6 +59,8 @@ public class ArticleView extends AppCompatActivity {
     SharedPreferences commentupdatetime, likes, unlikes;
     ImageView like, likees, unlike, unlikees, sendcomment;
     ArrayList<Comment> arrayList = new ArrayList<>();
+    ArrayList<String> commentarray = new ArrayList<>();
+
     public final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String articleid, articletitle, articledate, articledescription, likeflag, articleview,
             articleupdatetime, likecount, unlikecount, articlerate, apky, mail;
@@ -182,7 +184,11 @@ public class ArticleView extends AppCompatActivity {
                 break;
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ArticleView.this, Article.class);
+        startActivity(i);
+    }
     public void likefn(View v) {
         if (like.isEnabled()) {
             Map<String, String> map = new HashMap<>();
@@ -443,6 +449,9 @@ public class ArticleView extends AppCompatActivity {
                     } else {
                         JSONArray array = resobj.optJSONArray("ARTICLE_COMMENT");
                         modifiedtime = resobj.getString("CurrentDateTime");
+                        if(array.length()>0) {
+                            int a = getContentResolver().delete(CommentContentProvider.CONTENT_URI, CommentTable.COMMENT_TYPE + " =? " + " and " + CommentTable.TICKET_ID + "=?", new String[]{"2", articleid});
+                        }
                         for (int i = 0; i < array.length(); i++) {
                             try {
                                 JSONObject jObject = array.getJSONObject(i);
@@ -461,16 +470,18 @@ public class ArticleView extends AppCompatActivity {
                                         lastname = value;
                                     }
                                 }
-                                ContentValues values = new ContentValues();
-                                values.put(CommentTable.TICKET_LOG, "");
-                                values.put(CommentTable.LOG_MESSAGE, articlecomment);
-                                values.put(CommentTable.LOG_STATUS, "");
-                                values.put(CommentTable.LOG_ATTACHMENT, "");
-                                values.put(CommentTable.LOG_DATE, date);
-                                values.put(CommentTable.LOG_NAME, firstname + lastname);
-                                values.put(CommentTable.TICKET_ID, articleid);
-                                values.put(CommentTable.COMMENT_TYPE, "");
-                                getContentResolver().insert(CommentContentProvider.CONTENT_URI, values);
+
+                                    ContentValues values = new ContentValues();
+                                    values.put(CommentTable.TICKET_LOG, "");
+                                    values.put(CommentTable.LOG_MESSAGE, articlecomment);
+                                    values.put(CommentTable.LOG_STATUS, "");
+                                    values.put(CommentTable.LOG_ATTACHMENT, "");
+                                    values.put(CommentTable.LOG_DATE, date);
+                                    values.put(CommentTable.LOG_NAME, firstname + lastname);
+                                    values.put(CommentTable.TICKET_ID, articleid);
+                                    values.put(CommentTable.COMMENT_TYPE, "2");
+                                    getContentResolver().insert(CommentContentProvider.CONTENT_URI, values);
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 return false;
