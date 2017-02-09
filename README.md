@@ -6,6 +6,12 @@
 
 ## Usage
 
+Add a dependency to your build.gradle:
+
+	dependencies {
+    	compile 'com.github.clans:fab:1.6.4'
+	}
+	
 Initialize Config:
 
 	import com.helpsumo.api.ticketing.ticket.Helpsumo;
